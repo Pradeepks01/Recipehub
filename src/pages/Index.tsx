@@ -1,28 +1,14 @@
-
 import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Dashboard from '@/components/Dashboard';
 import RecipeEditor from '@/components/RecipeEditor';
 import RecipeViewer from '@/components/RecipeViewer';
 import LoginModal from '@/components/LoginModal';
+import { Recipe } from '@/types/Recipe';
 
 interface User {
   name: string;
   email: string;
-}
-
-interface Recipe {
-  id: string;
-  title: string;
-  description: string;
-  servings: number;
-  tags: string[];
-  ingredients: any[];
-  steps: any[];
-  author: string;
-  collaborators: string[];
-  lastModified: string;
-  isPublic: boolean;
 }
 
 const Index = () => {

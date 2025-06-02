@@ -7,32 +7,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, Users, Clock, Play, Pause, RotateCcw, Plus, Minus, Edit, Share2 } from 'lucide-react';
-
-interface Ingredient {
-  id: string;
-  name: string;
-  amount: number;
-  unit: string;
-}
-
-interface Step {
-  id: string;
-  instruction: string;
-  timerMinutes?: number;
-}
-
-interface Recipe {
-  id: string;
-  title: string;
-  description: string;
-  servings: number;
-  tags: string[];
-  ingredients: Ingredient[];
-  steps: Step[];
-  author: string;
-  collaborators: string[];
-  lastModified: string;
-}
+import { Recipe } from '@/types/Recipe';
 
 interface RecipeViewerProps {
   recipe: Recipe;
@@ -59,7 +34,8 @@ const RecipeViewer = ({ recipe, onBack, onEdit }: RecipeViewerProps) => {
     return () => clearInterval(interval);
   }, [activeTimer]);
 
-  const scaledIngredients = recipe.ingredients.map(ingredient => ({
+  // Ensure ingredients array exists before mapping
+  const scaledIngredients = (recipe.ingredients || []).map(ingredient => ({
     ...ingredient,
     amount: (ingredient.amount * currentServings) / recipe.servings
   }));
@@ -191,7 +167,7 @@ const RecipeViewer = ({ recipe, onBack, onEdit }: RecipeViewerProps) => {
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
-                {recipe.steps.map((step, index) => (
+                {(recipe.steps || []).map((step, index) => (
                   <div key={step.id} className="space-y-3">
                     <div className="flex items-start gap-3">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${

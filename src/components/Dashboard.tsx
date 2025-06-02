@@ -1,25 +1,11 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Clock, Users, Search, Filter, Star } from 'lucide-react';
-
-interface Recipe {
-  id: string;
-  title: string;
-  description: string;
-  servings: number;
-  tags: string[];
-  collaborators: string[];
-  author: string;
-  lastModified: string;
-  cookTime: number;
-  rating: number;
-  isPublic: boolean;
-}
+import { Clock, Users, Search, Star } from 'lucide-react';
+import { Recipe } from '@/types/Recipe';
 
 interface DashboardProps {
   onSelectRecipe: (recipe: Recipe) => void;
@@ -43,7 +29,29 @@ const Dashboard = ({ onSelectRecipe, onCreateNew }: DashboardProps) => {
       lastModified: '2 hours ago',
       cookTime: 45,
       rating: 4.8,
-      isPublic: true
+      isPublic: true,
+      ingredients: [
+        { id: '1', name: 'All-purpose flour', amount: 2.25, unit: 'cups' },
+        { id: '2', name: 'Baking soda', amount: 1, unit: 'tsp' },
+        { id: '3', name: 'Salt', amount: 1, unit: 'tsp' },
+        { id: '4', name: 'Butter', amount: 1, unit: 'cup' },
+        { id: '5', name: 'Brown sugar', amount: 0.75, unit: 'cup' },
+        { id: '6', name: 'White sugar', amount: 0.75, unit: 'cup' },
+        { id: '7', name: 'Eggs', amount: 2, unit: 'large' },
+        { id: '8', name: 'Vanilla extract', amount: 2, unit: 'tsp' },
+        { id: '9', name: 'Chocolate chips', amount: 2, unit: 'cups' }
+      ],
+      steps: [
+        { id: '1', instruction: 'Preheat oven to 375°F (190°C).' },
+        { id: '2', instruction: 'In a medium bowl, whisk together flour, baking soda, and salt.' },
+        { id: '3', instruction: 'In a large bowl, cream together butter and both sugars until light and fluffy.', timerMinutes: 3 },
+        { id: '4', instruction: 'Beat in eggs one at a time, then vanilla extract.' },
+        { id: '5', instruction: 'Gradually mix in the flour mixture until just combined.' },
+        { id: '6', instruction: 'Stir in chocolate chips.' },
+        { id: '7', instruction: 'Drop rounded tablespoons of dough onto ungreased baking sheets.' },
+        { id: '8', instruction: 'Bake for 9-11 minutes until golden brown.', timerMinutes: 10 },
+        { id: '9', instruction: 'Cool on baking sheet for 2 minutes before transferring to wire rack.', timerMinutes: 2 }
+      ]
     },
     {
       id: '2',
@@ -56,20 +64,24 @@ const Dashboard = ({ onSelectRecipe, onCreateNew }: DashboardProps) => {
       lastModified: '1 day ago',
       cookTime: 25,
       rating: 4.6,
-      isPublic: false
-    },
-    {
-      id: '3',
-      title: 'Rustic Sourdough Bread',
-      description: 'A collaborative effort to perfect the art of sourdough with detailed fermentation notes.',
-      servings: 8,
-      tags: ['Bread', 'Fermentation', 'Advanced'],
-      collaborators: ['baker1@email.com', 'baker2@email.com', 'baker3@email.com'],
-      author: 'David Miller',
-      lastModified: '3 days ago',
-      cookTime: 720,
-      rating: 4.9,
-      isPublic: true
+      isPublic: false,
+      ingredients: [
+        { id: '1', name: 'Chicken breast', amount: 1, unit: 'lb' },
+        { id: '2', name: 'Thai basil leaves', amount: 1, unit: 'cup' },
+        { id: '3', name: 'Garlic', amount: 4, unit: 'cloves' },
+        { id: '4', name: 'Thai chilies', amount: 3, unit: 'pieces' },
+        { id: '5', name: 'Fish sauce', amount: 2, unit: 'tbsp' },
+        { id: '6', name: 'Soy sauce', amount: 1, unit: 'tbsp' },
+        { id: '7', name: 'Vegetable oil', amount: 2, unit: 'tbsp' }
+      ],
+      steps: [
+        { id: '1', instruction: 'Heat oil in a wok or large skillet over high heat.' },
+        { id: '2', instruction: 'Add garlic and chilies, stir-fry for 30 seconds.', timerMinutes: 1 },
+        { id: '3', instruction: 'Add chicken and stir-fry until cooked through.', timerMinutes: 5 },
+        { id: '4', instruction: 'Add fish sauce and soy sauce, toss to combine.' },
+        { id: '5', instruction: 'Add basil leaves and stir until wilted.' },
+        { id: '6', instruction: 'Serve immediately with steamed rice.' }
+      ]
     }
   ];
 
